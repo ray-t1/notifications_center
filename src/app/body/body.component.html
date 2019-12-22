@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="container col-lg-6" style="background-color: steelblue;">
+        <form [formGroup]="notificationForm" (ngSubmit)="onFormSubmit()">
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="notificationTitle">Título de la notificación</label>
+                    <input type="text" class="form-control" id="notificationTitle"formControlName="title">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="notificationImage">Imagen de la notificación</label>
+                    <input type="file" class="form-contro-file" id="notificationImage" placeholder="Imagen de la notificación" 
+                    name="imageUrl" formControlName="image">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="notificationText">Texto de la notificación</label>
+                    <textarea class="form-control" id="notificationText" rows="3"  
+                    name="notificationText" formControlName="text"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-groug col-lg-12">
+                    <label for="select">Destinatario de la notificación</label>
+                    <select class="form-control" id="destination">
+                        <option [value]="item" *ngFor="let item of lista">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <label> TUTORIAL </label>
+            <input type="text"
+                    class="form-control"
+                    (input)="onUpdateText($event)">
+            <p>{{ inputText }}</p>
+             -->
+            <label> TUTORIAL </label>
+            <input type="text" class="form-control" 
+                    [(ngModel)]="inputText" 
+                    [ngModelOptions]="{standalone: true}">
+            <p>{{ inputText }}</p>
+
+            <button type="submit" class="btn btn-primary"> Enviar</button>
+            <p> {{ click }} </p>
+            <p *ngIf="pressed"> Presionaste el botón {{ inputText }}</p>
+        </form>
+    </div>
+    <div class="continer col-lg-6" style="background-color:tomato; height:500;">
+        <div class="media">
+            <img class="mr-3" src="../../assets/img/Capture.PNG" alt="Generic placeholder image">
+        </div><div class="row">
+
+        </div>
+    </div>
+</div>
