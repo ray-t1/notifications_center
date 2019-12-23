@@ -33,7 +33,7 @@ export class BodyComponent implements OnInit {
 
   // getDevices(){
   //   this.http.get('http://localhost:4200/api/getAll')
-  //   .
+  //   
   // }
 
   onFormSubmit() {
