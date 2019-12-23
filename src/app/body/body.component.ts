@@ -16,7 +16,7 @@ export class BodyComponent implements OnInit {
   inputText = 'Quasimoto';
   pressed = false;
 
-  userDevices = [];
+  lista = [];
   notificationForm = new FormGroup({
     title: new FormControl(),
     text: new FormControl(),
