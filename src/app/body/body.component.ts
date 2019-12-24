@@ -44,7 +44,7 @@ export class BodyComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.http.post('http://localhost:4200/api/push-test', this.notificationForm.value, { responseType: 'json' })
+    this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
     .subscribe(responseData => {  
       console.log(' Success');
     }, error => {
