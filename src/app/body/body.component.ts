@@ -36,7 +36,7 @@ export class BodyComponent implements OnInit {
     return this.http.get('https://padel-labx.herokuapp.com/api/getAll')
                 .subscribe(data => {
                   (this.list = data)
-                  console.log(data)
+                  console.log(this.list)
                 }, 
                 error => {
                   console.log(error)

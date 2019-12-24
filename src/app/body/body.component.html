@@ -25,7 +25,7 @@
                 <div class="form-groug col-lg-12">
                     <label for="select">Destinatario de la notificación</label>
                     <select class="form-control" id="destination" formControlName="destination">
-                        <option [value]="item.id" *ngFor="let item of list">{{ item.id  }}</option>
+                        <option [value]="item.id" *ngFor="let item of list">{{ item.user.full_name }}</option>
                     </select>
                 </div>
             </div>
