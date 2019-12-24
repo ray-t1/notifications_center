@@ -64,7 +64,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "paint-store:build",
-            "proxyConfig": ""
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {

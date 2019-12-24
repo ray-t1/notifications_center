@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="container col-lg-6" style="background-color: steelblue;">
+    <div class="container col-lg-6" style="background-color:transparent; height: 370px;">
         <form [formGroup]="notificationForm" (ngSubmit)="onFormSubmit()">
             <div class="row">
                 <div class="form-group col-lg-12">
@@ -24,8 +24,8 @@
             <div class="row">
                 <div class="form-groug col-lg-12">
                     <label for="select">Destinatario de la notificación</label>
-                    <select class="form-control" id="destination">
-                        <option [value]="item" *ngFor="let item of lista">{{item}}</option>
+                    <select class="form-control" id="destination" formControlName="destination">
+                        <option [value]="item.id" *ngFor="let item of list">{{ item.id  }}</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <p *ngIf="pressed"> Presionaste el botón {{ inputText }}</p>
         </form>
     </div>
-    <div class="continer col-lg-6" style="background-color:tomato; height:500;">
+    <div class="continer col-lg-6" style="background-color:transparent; height:370px;">
         <div class="media">
             <img class="mr-3" src="../../assets/img/Capture.PNG" alt="Generic placeholder image">
         </div><div class="row">

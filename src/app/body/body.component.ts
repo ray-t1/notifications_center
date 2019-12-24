@@ -16,7 +16,7 @@ export class BodyComponent implements OnInit {
   inputText = 'Quasimoto';
   pressed = false;
 
-  lista = [];
+  public list: any = []; 
   notificationForm = new FormGroup({
     title: new FormControl(),
     text: new FormControl(),
@@ -29,12 +29,19 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getDevices();
   }
 
-  // getDevices(){
-  //   this.http.get('http://localhost:4200/api/getAll')
-  //   
-  // }
+  getDevices(){
+    return this.http.get('https://padel-labx.herokuapp.com/api/getAll')
+                .subscribe(data => {
+                  (this.list = data)
+                  console.log(data)
+                }, 
+                error => {
+                  console.log(error)
+                });
+  }
 
   onFormSubmit() {
     this.http.post('http://localhost:4200/api/push-test', this.notificationForm.value, { responseType: 'json' })
