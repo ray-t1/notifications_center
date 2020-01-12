@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
-import { NgForm, FormControl, FormGroup } from '@angular/forms';
+import { NgForm, FormControl, FormGroup,} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -13,8 +13,8 @@ import { HttpClient } from '@angular/common/http';
 export class BodyComponent implements OnInit {
   click = 'No se ha enviado el formulario';
   allowNew = false;
-  inputText = 'Quasimoto';
   pressed = false;
+  checked = false;
 
   public list: any = []; 
   notificationForm = new FormGroup({
@@ -22,6 +22,7 @@ export class BodyComponent implements OnInit {
     text: new FormControl(),
     image: new FormControl(),
     destination: new FormControl(),
+    all_users : new FormControl(this.checked)
   })
 
   constructor(private http: HttpClient) {
@@ -33,7 +34,8 @@ export class BodyComponent implements OnInit {
   }
 
   getDevices(){
-    return this.http.get('https://padel-labx.herokuapp.com/api/getAll')
+    return this.http.get('http://127.0.0.1:8000/api/getAll') 
+    //this.http.get('https://padel-labx.herokuapp.com/api/getAll')
                 .subscribe(data => {
                   (this.list = data)
                   console.log(this.list)
@@ -44,16 +46,16 @@ export class BodyComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
+    console.log(this.notificationForm.value)
+    this.http.post('http://127.0.0.1:8000/api/push-test',this.notificationForm.value, {responseType:'json'})
+    //this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
     .subscribe(responseData => {  
-      console.log(' Success');
+      this.pressed=!this.pressed;  
+      console.log('Success');
     }, error => {
+      this.pressed = !this.pressed;   
       console.log(error)
     });
   }
-  
-  onUpdateText(event: Event) {
-    console.log(event);
-    this.inputText = (<HTMLInputElement>event.target).value;
-  }
+    
 }

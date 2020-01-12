@@ -29,6 +29,28 @@
                     </select>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <input class="form-control-input" type="checkbox" [(ngModel)]="checked" formControlName="all_users"
+                        name="all_users">
+                    <label class="form-check-label" for="all_users"> Enviar a todos los dispositivos </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <input class="form-control-input" type="checkbox" [(ngModel)]="checked" formControlName="android_users"
+                        name="android_users" ng-disable=[]>
+                    <label class="form-check-label" for="all_users"> Enviar a todos los dispositivos Android </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <input class="form-control-input" type="checkbox" [(ngModel)]="checked" formControlName="ios_users"
+                        name="ios_users">
+                    <label class="form-check-label" for="all_users"> Enviar a todos los dispositivos iOS </label>
+                </div>
+            </div>
             <!-- <label> TUTORIAL </label>
             <input type="text"
                     class="form-control"
@@ -40,10 +62,10 @@
                     [(ngModel)]="inputText" 
                     [ngModelOptions]="{standalone: true}">
             <p>{{ inputText }}</p> -->
-
             <button type="submit" class="btn btn-primary"> Enviar</button>
-            <p> {{ click }} </p>
-            <p *ngIf="pressed"> Presionaste el botón {{ inputText }}</p>
+            <br>
+            <p *ngIf="!pressed"> {{ click }} </p>
+            <p *ngIf="pressed"> Formulario enviado con éxito </p>
         </form>
     </div>
     <div class="continer col-lg-6" style="background-color:transparent; height:370px;">
