@@ -22,7 +22,9 @@ export class BodyComponent implements OnInit {
     text: new FormControl(),
     image: new FormControl(),
     destination: new FormControl(),
-    all_users : new FormControl(this.checked)
+    all_users : new FormControl(this.checked),
+    android_users: new FormControl(this.checked),
+    ios_users: new FormControl(this.checked)
   })
 
   constructor(private http: HttpClient) {
