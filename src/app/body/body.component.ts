@@ -14,7 +14,9 @@ export class BodyComponent implements OnInit {
   click = 'No se ha enviado el formulario';
   allowNew = false;
   pressed = false;
-  checked = false;
+  all = false;
+  android = false;
+  ios= false;
 
   public list: any = []; 
   notificationForm = new FormGroup({
@@ -22,9 +24,9 @@ export class BodyComponent implements OnInit {
     text: new FormControl(),
     image: new FormControl(),
     destination: new FormControl(),
-    all_users : new FormControl(this.checked),
-    android_users: new FormControl(this.checked),
-    ios_users: new FormControl(this.checked)
+    all_users : new FormControl(this.all),
+    android_users: new FormControl(this.android),
+    ios_users: new FormControl(this.ios)
   })
 
   constructor(private http: HttpClient) {
