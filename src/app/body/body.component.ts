@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { stringify } from 'querystring';
 import { NgForm, FormControl, FormGroup,} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-body',
@@ -38,8 +36,8 @@ export class BodyComponent implements OnInit {
   }
 
   getDevices(){
-    //return this.http.get('http://127.0.0.1:8000/api/getAll') 
-    this.http.get('https://padel-labx.herokuapp.com/api/getAll')
+    return this.http.get('http://127.0.0.1:8000/api/getAll') 
+    //this.http.get('https://padel-labx.herokuapp.com/api/getAll')
                 .subscribe(data => {
                   (this.list = data)
                   console.log(this.list)
@@ -51,8 +49,8 @@ export class BodyComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.notificationForm.value)
-    //this.http.post('http://127.0.0.1:8000/api/push-test',this.notificationForm.value, {responseType:'json'})
-    this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
+    this.http.post('http://127.0.0.1:8000/api/push-test',this.notificationForm.value, {responseType:'json'})
+    //this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
     .subscribe(responseData => {  
       this.pressed=!this.pressed;  
       console.log('Success');
@@ -60,6 +58,12 @@ export class BodyComponent implements OnInit {
       this.pressed = !this.pressed;   
       console.log(error)
     });
+  }
+  
+  isOpen = false;
+
+  isOpenChange($event: boolean) {
+    this.isOpen = $event;
   }
     
 }
