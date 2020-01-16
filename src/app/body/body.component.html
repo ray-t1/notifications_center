@@ -13,7 +13,14 @@
                         <textarea class="form-control" id="notificationText" rows="3" name="notificationText"
                             formControlName="text"></textarea>
                     </div>
-                    <div class="form-groug">
+                    <div class="form-group">
+                        <label for="os">Tipo de sistema operativo</label>
+                        <select class="form-control" id="os" formControlName="os" (change)="getDevices($event)">
+                            <option selected>Selecciona un sistema operativo</option>
+                            <option *ngFor="let item of os">{{ item }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="select">Destinatario de la notificación</label>
                         <select class="form-control" id="destination" formControlName="destination">
                             <option [value]="item.device_token" *ngFor="let item of list">{{ item.name + ' ' + item.lastname }}</option>

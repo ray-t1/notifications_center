@@ -16,6 +16,7 @@ export class BodyComponent implements OnInit {
   android = false;
   ios= false;
 
+  public os: any = ['Android','iOS'];
   public list: any = []; 
   notificationForm = new FormGroup({
     title: new FormControl(),
@@ -24,7 +25,8 @@ export class BodyComponent implements OnInit {
     destination: new FormControl(),
     all_users : new FormControl(this.all),
     android_users: new FormControl(this.android),
-    ios_users: new FormControl(this.ios)
+    ios_users: new FormControl(this.ios),
+    os: new FormControl()
   })
 
   constructor(private http: HttpClient) {
@@ -32,12 +34,11 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDevices();
   }
 
-  getDevices(){
-    //return this.http.get('http://127.0.0.1:8000/api/getAll') 
-    this.http.get('https://padel-labx.herokuapp.com/api/getAll')
+  getDevices(e){
+    //return this.http.post('http://127.0.0.1:8000/api/getAll', {"os":e.target.value}, { responseType: 'json' }) 
+    return this.http.post('https://padel-labx.herokuapp.com/api/getAll',{"os":e.target.value}, { responseType: 'json' })
                 .subscribe(data => {
                   (this.list = data)
                   console.log(this.list)
@@ -49,8 +50,8 @@ export class BodyComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.notificationForm.value)
-    //this.http.post('http://127.0.0.1:8000/api/push-test',this.notificationForm.value, {responseType:'json'})
-    this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
+    //return this.http.post('http://127.0.0.1:8000/api/push-test',this.notificationForm.value, {responseType:'json'})
+    return this.http.post('https://padel-labx.herokuapp.com/api/push-test', this.notificationForm.value, { responseType: 'json' })
     .subscribe(responseData => {  
       this.pressed=!this.pressed;  
       console.log('Success');
@@ -65,5 +66,5 @@ export class BodyComponent implements OnInit {
   isOpenChange($event: boolean) {
     this.isOpen = $event;
   }
-    
+  
 }
