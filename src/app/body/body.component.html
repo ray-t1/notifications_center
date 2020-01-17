@@ -2,73 +2,61 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-xs-12 col-sm-12">
-            <form [formGroup]="notificationForm" (ngSubmit)="onFormSubmit()">
-                    <div class="form-group">
-                        <label for="notificationTitle">Título de la notificación</label>
-                        <input type="text" class="form-control" id="notificationTitle" formControlName="title">
-                        <label for="notificationImage">Imagen de la notificación</label>
-                        <input type="file" class="form-contro-file" id="notificationImage" placeholder="Imagen de la notificación"
-                            name="imageUrl" formControlName="image">
-                        <label for="notificationText">Texto de la notificación</label>
-                        <textarea class="form-control" id="notificationText" rows="3" name="notificationText"
-                            formControlName="text"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="os">Tipo de sistema operativo</label>
-                        <select class="form-control" id="os" formControlName="os" (change)="getDevices($event)">
-                            <option selected>Selecciona un sistema operativo</option>
-                            <option *ngFor="let item of os">{{ item }}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="select">Destinatario de la notificación</label>
-                        <select class="form-control" id="destination" formControlName="destination">
-                            <option [value]="item.device_token" *ngFor="let item of list">{{ item.name + ' ' + item.lastname }}</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input class="form-control-input" type="checkbox" [(ngModel)]="all" formControlName="all_users"
-                            name="all_users">
-                        <label class="form-check-label" for="all_users"> Enviar a todos los dispositivos </label>
-                        <br>
-                        <input class="form-control-input" type="checkbox" [(ngModel)]="android" formControlName="android_users"
-                            name="android_users" ng-disable=[]>
-                        <label class="form-check-label" for="android_users"> Enviar a todos los dispositivos Android </label>
-                        <br>
-                        <input class="form-control-input" type="checkbox" [(ngModel)]="ios" formControlName="ios_users"
-                            name="ios_users">
-                        <label class="form-check-label" for="ios_users"> Enviar a todos los dispositivos iOS </label>
-                        <br>
-                        <br>
-                        <button type="submit" class="btn btn-primary"> Enviar</button>
-                    </div>
-                    <br>
-                    <p *ngIf="!pressed"> {{ click }} </p>
-                    <p *ngIf="pressed"> Formulario enviado con éxito </p>
-            </form>
-        </div>
-        <div class="col-md-6 col-xs-12 col-sm-12">
-            <img class="img-fluid" src="../../assets/img/Capture.PNG" alt="Generic placeholder image">
-        </div>
-        <div>
             <nz-switch [(ngModel)]="isOpen" [nzCheckedChildren]="checkedTemplate"></nz-switch>
             <ng-template #checkedTemplate><i nz-icon nzType="scissor"></i></ng-template>
             <p></p>
             <ng2-screenshot [isOpen]="isOpen" (isOpenChange)="isOpenChange($event)">
-                <ng2-screenshot-toolbox></ng2-screenshot-toolbox>
-                <nz-card>
-                    <p>I understand that I am addressing a very sensitive topic;</p>
-                    <p>I will probably offend many readers that will say that I am an insane troll and my views are bullshit.
-                    </p>
-                    <p>Offending is not my objective</p>
-                    <p>but I stand by my opinions. Of course comments are here to for you to voice your opinion</p>
-                    <p>And yes this piece is biased by my past experiences, but that’s the value of it,</p>
-                    <p>sharing my experiences.</p>
-                </nz-card>
+            <ng2-screenshot-toolbox></ng2-screenshot-toolbox>
+                <form [formGroup]="notificationForm" (ngSubmit)="onFormSubmit()">
+                        <div class="form-group">
+                            <label for="notificationTitle">Título de la notificación</label>
+                            <input type="text" class="form-control" id="notificationTitle" formControlName="title">
+                            <label for="notificationImage">Imagen de la notificación</label>
+                            <input type="file" class="form-contro-file" id="notificationImage" placeholder="Imagen de la notificación"
+                                name="imageUrl" formControlName="image">
+                            <label for="notificationText">Texto de la notificación</label>
+                            <textarea class="form-control" id="notificationText" rows="3" name="notificationText"
+                                formControlName="text"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="os">Tipo de sistema operativo</label>
+                            <select class="form-control" id="os" formControlName="os" (change)="getDevices($event)">
+                                <option selected>Selecciona un sistema operativo</option>
+                                <option *ngFor="let item of os">{{ item }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select">Destinatario de la notificación</label>
+                            <select class="form-control" id="destination" formControlName="destination">
+                                <option [value]="item.device_token" *ngFor="let item of list">{{ item.name + ' ' + item.lastname }}</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input class="form-control-input" type="checkbox" [(ngModel)]="all" formControlName="all_users"
+                                name="all_users">
+                            <label class="form-check-label" for="all_users"> Enviar a todos los dispositivos </label>
+                            <br>
+                            <input class="form-control-input" type="checkbox" [(ngModel)]="android" formControlName="android_users"
+                                name="android_users" ng-disable=[]>
+                            <label class="form-check-label" for="android_users"> Enviar a todos los dispositivos Android </label>
+                            <br>
+                            <input class="form-control-input" type="checkbox" [(ngModel)]="ios" formControlName="ios_users"
+                                name="ios_users">
+                            <label class="form-check-label" for="ios_users"> Enviar a todos los dispositivos iOS </label>
+                            <br>
+                            <br>
+                            <button type="submit" class="btn btn-primary"> Enviar</button>
+                        </div>
+                        <br>
+                        <p *ngIf="!pressed"> {{ click }} </p>
+                        <p *ngIf="pressed"> Formulario enviado con éxito </p>
+                </form>
             </ng2-screenshot>
-        
         </div>
+        <div class="col-md-6 col-xs-12 col-sm-12">
+            <img class="img-fluid" src="../../assets/img/Capture.PNG" alt="Generic placeholder image">
+        </div>    
     </div>
 </div>
     
