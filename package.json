@@ -24,6 +24,7 @@
     "bootstrap": "^3.4.1",
     "dom-to-image": "^2.6.0",
     "express": "*",
+    "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.4.1",
     "ng-zorro-antd": "^8.5.2",
     "ng2-screenshot": "^0.1.2",

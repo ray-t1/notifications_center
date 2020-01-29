@@ -93,7 +93,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "https://html2canvas.hertzen.com/dist/html2canvas.js"
+            ]
           }
         },
         "lint": {

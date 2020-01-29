@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormControl, FormGroup,} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+declare let html2canvas: any;
+
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
@@ -15,7 +17,9 @@ export class BodyComponent implements OnInit {
   all = false;
   android = false;
   ios= false;
+  capturedImage;
 
+  public selected: any = 'android';
   public os: any = ['Android','iOS'];
   public list: any = []; 
   notificationForm = new FormGroup({
@@ -34,18 +38,23 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.list = this.getDevicesReq('android');
   }
 
   getDevices(e){
-    //return this.http.post('http://127.0.0.1:8000/api/getAll', {"os":e.target.value}, { responseType: 'json' }) 
-    return this.http.post('https://padel-labx.herokuapp.com/api/getAll',{"os":e.target.value}, { responseType: 'json' })
-                .subscribe(data => {
-                  (this.list = data)
-                  console.log(this.list)
-                }, 
-                error => {
-                  console.log(error)
-                });
+    this.selected = e.target.value; 
+    this.getDevicesReq(this.selected);
+  }
+
+  getDevicesReq(e:any){
+    return this.http.post('https://padel-labx.herokuapp.com/api/getAll', {"os": e}, { responseType: 'json' })
+      .subscribe(data => {
+        (this.list = data)
+        console.log(this.list)
+      },
+        error => {
+          console.log(error)
+        });
   }
 
   onFormSubmit() {
@@ -61,10 +70,37 @@ export class BodyComponent implements OnInit {
     });
   }
   
-  isOpen = false;
+  clickme() {
+    html2canvas(document.querySelector("#capture")).then(canvas => {
 
-  isOpenChange($event: boolean) {
-    this.isOpen = $event;
+      debugger;
+
+      /// document.body.appendChild(canvas);
+      this.capturedImage = canvas.toDataURL();
+      console.log("canvas.toDataURL() -->" + this.capturedImage);
+      // this will contain something like (note the ellipses for brevity), console.log cuts it off 
+      // "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAa0AAAB3CAYAAACwhB/KAAAXr0lEQVR4Xu2dCdiNZf7HP/ZQkpQtaUxDjYYoTSYlURMhGlmKa..."
+
+
+      canvas.toBlob(function (blob) {
+
+        //  just pass blob to something expecting a blob
+        // somfunc(blob);
+
+        // Same as canvas.toDataURL(), just longer way to do it.
+        var reader = new FileReader();
+        debugger;
+        reader.readAsDataURL(blob);
+        reader.onloadend = function () {
+          let base64data = reader.result;
+          console.log("Base64--> " + base64data);
+        }
+
+      });
+
+
+    });
   }
+
   
 }
